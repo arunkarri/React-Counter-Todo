@@ -6,8 +6,8 @@ let ToDo = () => {
     const [todos, setTodos] = React.useState([{ value: 'My first Todo', edit: false, done: false }]);
     const [text, setText] = React.useState('');
 
-    const addTodo = () => {
-        if (text !== '')
+    const addTodo = (event) => {
+        if (text !== '' && event.key === 'Enter')
             setTodos(todos.concat([{ value: text, edit: false, done: false }]));
     };
     const removeTodo = (index) => {
@@ -42,6 +42,9 @@ let ToDo = () => {
                         value={text}
                         onChange={() => {
                             setText(event.target.value);
+                        }}
+                        onKeyDown={() => {
+                            addTodo(event)
                         }}
                     />
                 </div><br /><br />
@@ -144,8 +147,8 @@ let Counter = () => {
             <button className="btn btn-primary btn-xs" onClick={addCounter}>
                 Add Counter
             </button>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <div className="row">
                 {counters.map((element, index) => {
                     return (
@@ -164,9 +167,6 @@ let Counter = () => {
                                     Delete
                                 </button>
                                 </div>
-
-
-
                             </div>
                         </div>
                     );
